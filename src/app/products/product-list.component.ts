@@ -28,9 +28,17 @@ export class ProductListComponent implements OnInit {
   }
   filteredProducts: IProduct[];
   products: IProduct[];
+  errorMessage: string;
+  // ---------methods ------------------------------
   ngOnInit(): void {
-    this.products = this._productService.getProducts()
-    this.filteredProducts = this.products;
+    // this.products = this._productService.getProducts()
+    this._productService.getProducts().subscribe({
+      next: products => {
+        this.products = products;
+        this.filteredProducts = this.products;
+      },
+      error: err => this.errorMessage = err
+    })
   }
   onShowImageClick(): void{
     this.isShowingImages = !this.isShowingImages;
