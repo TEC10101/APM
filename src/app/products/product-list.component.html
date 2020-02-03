@@ -1,6 +1,6 @@
 <div class="card">
   <div class="card-header">
-    {{pageTitle}}
+    {{pageTitle}} {{clickedItem}}
   </div>
   <div class="card-body">
     <div class="row">
@@ -35,7 +35,7 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor='let product of products'>
+          <tr *ngFor='let product of filteredProducts'>
             
 
               <td> <!-- image data -->
@@ -46,10 +46,13 @@
                         *ngIf='isShowingImages'>
                       </td>
               <td>{{ product.productName }}</td>
-              <td>{{ product.productCode | lowercase }}</td>
+              <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
               <td>{{ product.releaseDate }}</td>
               <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
-              <td>{{ product.starRating }}</td>
+              <td>
+                <pm-star [rating]='product.starRating'
+                          (clickedItem)=onRatingClicked($event)></pm-star>
+              </td>
           </tr>
         </tbody>
       </table>

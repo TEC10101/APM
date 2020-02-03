@@ -7,12 +7,25 @@ import { IProduct } from './product';
   styleUrls: ['./product-list.component.css']
 })
 export class ProductListComponent implements OnInit {
+
+  constructor() {
+    this.filteredProducts = this.products;
+    // this.listFilter = 'cart';
+  }
+
   pageTitle: string = 'Product List';
-  // products: Product[] = [];
+  clickedItem: string = '';
+  
   imageWidth: number = 50;
   imageMargin: number = 2;
   isShowingImages: boolean = false;
-  listFilter: string = 'cart'; //store last entered filter from user
+  private _listFilter: string = ''; //store last entered filter from user
+  get listFilter(): string { return this._listFilter; }
+  set listFilter(value: string) { 
+    this._listFilter = value 
+    this.filteredProducts = this.listFilter ? this.performListFilter(this.listFilter) : this.products;
+  }
+  filteredProducts: IProduct[] = [];
   products: IProduct[] = [
     {
       "productId": 1,
@@ -35,11 +48,18 @@ export class ProductListComponent implements OnInit {
       "imageUrl": "assets/images/garden_cart.png"
     }
   ];
+  ngOnInit(): void {
+    console.log('in OnInit')
+  }
   onShowImageClick(): void{
     this.isShowingImages = !this.isShowingImages;
   }
-
-  ngOnInit(): void {
-    console.log('in OnInit')
+  performListFilter(filterBy: string): IProduct[] {
+    filterBy = filterBy.toLocaleLowerCase();
+    return this.products.filter((product: IProduct) => 
+        product.productName.toLocaleLowerCase().indexOf(filterBy) !== -1);
+  }
+  onRatingClicked(message: string): void {
+    this.clickedItem = message;
   }
 }
