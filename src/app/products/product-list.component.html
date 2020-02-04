@@ -36,23 +36,21 @@
         </thead>
         <tbody>
           <tr *ngFor='let product of filteredProducts'>
-            
-
-              <td> <!-- image data -->
-                <img [src]='product.imageUrl' alt=""
-                        [title]='product.productName'
-                        [style.width.px]='imageWidth'
-                        [style.margin.px]='imageMargin'
-                        *ngIf='isShowingImages'>
-                      </td>
-              <td>{{ product.productName }}</td>
-              <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
-              <td>{{ product.releaseDate }}</td>
-              <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
-              <td>
-                <pm-star [rating]='product.starRating'
-                          (clickedItem)=onRatingClicked($event)></pm-star>
-              </td>
+            <td> <!-- image data -->
+              <img [src]='product.imageUrl' alt=""
+                      [title]='product.productName'
+                      [style.width.px]='imageWidth'
+                      [style.margin.px]='imageMargin'
+                      *ngIf='isShowingImages'>
+                    </td>
+            <td [routerLink]="['/products', product.productId]">{{ product.productName }}</td>
+            <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
+            <td>{{ product.releaseDate }}</td>
+            <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
+            <td>
+              <pm-star [rating]='product.starRating'
+                        (clickedItem)=onRatingClicked($event)></pm-star>
+            </td>
           </tr>
         </tbody>
       </table>
