@@ -3,7 +3,7 @@ import { IProduct } from './product';
 import { ProductService } from './product.service';
 
 @Component({
-  selector: 'pm-products', // you can use the selector as a directive in other component templates
+  // selector: 'pm-products', // you can use the selector as a directive in other component templates
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
   providers: [ProductService]
