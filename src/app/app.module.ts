@@ -7,6 +7,7 @@ import { RouterModule } from "@angular/router";
 import { AppComponent } from './app.component';
 import { WelcomeComponent } from "./home/welcome.component"
 import { ProductModule } from './products/product.module';
+// import { ProductService } from './products/product.service';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { ProductModule } from './products/product.module';
     // ConvertToSpacesPipe,
     // StarComponent,
     // ProductDetailComponent,
-    WelcomeComponent
+    WelcomeComponent,
+    // ProductService
   ],
   imports: [
     BrowserModule,

@@ -5,7 +5,9 @@ import { catchError, tap } from "rxjs/operators";
 
 import { IProduct } from './product';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'  // this is so its usable anywher
+}) 
 export class ProductService {
   private productUrl = 'api/products/products.json'
 
@@ -17,6 +19,13 @@ export class ProductService {
       catchError(this.handleError)
     );
   }
+  // getSingleProduct(id: number): IProduct {
+  //   let all = this.http.get<IProduct[]>(this.productUrl).pipe(
+  //     tap(data => console.log('Single: ' + JSON.stringify(data))),
+  //     catchError(this.handleError)
+  //   );
+  //   return all
+  // }
   private handleError(err: HttpErrorResponse) {
     // in a real world app we may send the server to some remote logging infrastructure
     // instead of just logging it to the console

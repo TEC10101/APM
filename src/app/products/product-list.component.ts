@@ -6,14 +6,11 @@ import { ProductService } from './product.service';
   // selector: 'pm-products', // you can use the selector as a directive in other component templates
   templateUrl: './product-list.component.html',
   styleUrls: ['./product-list.component.css'],
-  providers: [ProductService]
+  // providers: [ProductService]
 })
 export class ProductListComponent implements OnInit {
 
-  constructor(productService: ProductService) {
-    this._productService = productService
-  }
-  private _productService: ProductService;
+  // private _productSvc: ProductService;
   pageTitle: string = 'Product List';
   clickedItem: string = '';
   
@@ -30,9 +27,12 @@ export class ProductListComponent implements OnInit {
   products: IProduct[];
   errorMessage: string;
   // ---------methods ------------------------------
+  constructor(private _productSvc: ProductService) {
+    // this._productSvc = productSvc
+  }
   ngOnInit(): void {
     // this.products = this._productService.getProducts()
-    this._productService.getProducts().subscribe({
+    this._productSvc.getProducts().subscribe({
       next: products => {
         this.products = products;
         this.filteredProducts = this.products;

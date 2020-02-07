@@ -2,6 +2,47 @@
   <div class="card-header">
     {{pageTitle + ':  ' + product.productName}}
   </div>
+  <!-- <pm-product-detail></pm-product-detail> -->
+
+  <div class="table-responsive">
+    <table class="table">
+      <thead>
+        <tr>
+          <th>
+            <!-- <button class="btn btn-primary"
+                    (click)='onShowImageClick()'>
+              {{isShowingImages ? 'Hide Images' : 'Show Images'}}
+            </button> -->
+          </th>
+          <th>Product</th>
+          <th>Code</th>
+          <th>Available</th>
+          <th>Price</th>
+          <th>5 Star rating</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td> <!-- image data -->
+            <img [src]='product.imageUrl' alt=""
+                    [title]='product.productName'
+                    [style.width.px]='imageWidth'
+                    [style.margin.px]='imageMargin'
+                    *ngIf='isShowingImages'>
+                  </td>
+          <td [routerLink]="['/products', product.productId]">{{ product.productName }}</td>
+          <td>{{ product.productCode | lowercase | convertToSpaces: '-' }}</td>
+          <td>{{ product.releaseDate }}</td>
+          <td>{{ product.price | currency:'USD':'symbol':'1.2-2' }}</td>
+          <td>
+            <pm-star [rating]='product.starRating'
+                      (clickedItem)=onRatingClicked($event)></pm-star>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
   <div class="card-footer">
     <button class="btn btn-outline-secondary"
             (click)='onBack()'
