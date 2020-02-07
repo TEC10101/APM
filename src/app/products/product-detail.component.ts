@@ -27,27 +27,14 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit() {
     let id = +this._route.snapshot.paramMap.get('id'); // use the snapshot approach only if you need the initial value of the parameter
     
-    this._productSvc.getProducts().subscribe({
-      next: products => {
+    this._productSvc.getSingleProduct(id).subscribe({
+      next: returnedProduct => {
         // code to retrieve the product info
         this.pageTitle += `: ${id}`;
-        this.product =  products.filter(x => x.productId === id).pop();
-        // this.filteredProducts = this.products;
+        this.product =  returnedProduct;
       },
       error: err => this.errorMessage = err
     })
-
-
-    // this.product =  {
-    //   "productId": 1,
-    //   "productName": "Leaf Rake",
-    //   "productCode": "GDN-0011",
-    //   "releaseDate": "March 19, 2019",
-    //   "description": "Leaf rake with 48-inch wooden handle.",
-    //   "price": 19.95,
-    //   "starRating": 3.2,
-    //   "imageUrl": "assets/images/leaf_rake.png"
-    // }
   }
   onBack(): void {
     this._router.navigate(['/products'])
